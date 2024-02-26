@@ -36,7 +36,8 @@ def get_url(keyword):
         # Scroll down using keyboard keys (simulating Page Down)
         body = driver.find_element(By.TAG_NAME, 'body')
         body.send_keys(Keys.PAGE_DOWN)
-
+        counter += 1
+        print("--- page " + str(counter) + " ---")
         try:
             # Find the div element with role="feed"
             feed_div = driver.find_element(By.CSS_SELECTOR, 'div[role="feed"]')
@@ -49,8 +50,10 @@ def get_url(keyword):
 
             # Scroll down further using keyboard keys (simulating Page Down)
             feed_div.send_keys(Keys.PAGE_DOWN)
+            if counter == 100:
+                print('--- Stop scrolling 100 page avoid infinite loop ---')
+                break
         except Exception as e:
-            counter += 1
             print("--- Something went wrong ---")
             print(e)
             print("----------------------------")
