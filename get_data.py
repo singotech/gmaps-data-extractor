@@ -29,6 +29,8 @@ def crawl(url):
     urlTitle = url.split('=', 1)
     print('--- Visit URL ' + urlTitle[0] + '  ---')
     driver.get(url)
+    driver.delete_all_cookies()
+    driver.implicitly_wait(5)
 
     page_source = driver.page_source
 
