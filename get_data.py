@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from fake_useragent import UserAgent
 import re, argparse, os, concurrent.futures
 
 MAX_THREADS = 5  # Adjust this value based on your preference
@@ -13,8 +14,11 @@ def crawl(url):
 
     # Create a new instance of the driver
     options = webdriver.FirefoxOptions()
+    user_agent = UserAgent().random
     options.add_argument('--headless')  # Optional: Run in headless mode (no browser window)
     options.add_argument('--disable-gpu')
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_argument(f'user-agent={user_agent}')
     options.set_preference('intl.accept_languages', 'id, en-us, en')
 
     service = webdriver.FirefoxService(executable_path=driver_path)
@@ -84,10 +88,10 @@ def crawl(url):
 
     # Get Phone Number
     # input             : data-item-id="phone:tel:00000000000"
-    # pattern           : phone\:tel\:(\d+)
+    # pattern           : phone\:tel\:(\d+)|phone\:tel\:\+(\d+)
     # expected output   : 00000000000
     phoneNumber = '-'
-    patternphoneNumber = r"phone\:tel\:(\d+)"
+    patternphoneNumber = r"phone\:tel\:(\d+)|phone\:tel\:\+(\d+)"
     matches = re.search(patternphoneNumber, page_source)
     if matches != None:
         phoneNumber = matches.group()

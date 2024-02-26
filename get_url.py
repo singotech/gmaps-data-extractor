@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from fake_useragent import UserAgent
 import time, random, re, argparse, os
 
 def is_target_text_present(driver, target_text):
@@ -19,8 +20,11 @@ def get_url(keyword):
 
     # Create a new instance of the driver
     options = webdriver.FirefoxOptions()
+    user_agent = UserAgent().random
     options.add_argument('--headless')  # Optional: Run in headless mode (no browser window)
     options.add_argument('--disable-gpu')
+    options.add_argument('--disable-blink-features=AutomationControlled')
+    options.add_argument(f'user-agent={user_agent}')
     options.set_preference('intl.accept_languages', 'id, en-us, en')
 
     service = webdriver.FirefoxService(executable_path=driver_path)
