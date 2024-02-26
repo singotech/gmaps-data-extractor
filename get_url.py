@@ -50,8 +50,8 @@ def get_url(keyword):
 
             # Scroll down further using keyboard keys (simulating Page Down)
             feed_div.send_keys(Keys.PAGE_DOWN)
-            if counter == 100:
-                print('--- Stop scrolling 100 page avoid infinite loop ---')
+            if counter == 300:
+                print('--- Stop scrolling 300 page avoid infinite loop ---')
                 break
         except Exception as e:
             print("--- Something went wrong ---")
