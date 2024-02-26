@@ -14,6 +14,8 @@ def crawl(url):
     # Create a new instance of the driver
     options = webdriver.FirefoxOptions()
     options.add_argument('--headless')  # Optional: Run in headless mode (no browser window)
+    options.add_argument('--disable-gpu')
+    options.set_preference('intl.accept_languages', 'id, en-us, en')
 
     service = webdriver.FirefoxService(executable_path=driver_path)
 
@@ -93,6 +95,7 @@ def crawl(url):
         print(phoneNumber)
     else :
         print("--- Phone number not found, skipped ---")
+        driver.quit()
         return
 
     with open("output/data.csv", "a") as filetowrite:

@@ -20,6 +20,8 @@ def get_url(keyword):
     # Create a new instance of the driver
     options = webdriver.FirefoxOptions()
     options.add_argument('--headless')  # Optional: Run in headless mode (no browser window)
+    options.add_argument('--disable-gpu')
+    options.add_preference('intl.accept_languages', 'id, en-us, en')
 
     service = webdriver.FirefoxService(executable_path=driver_path)
 
