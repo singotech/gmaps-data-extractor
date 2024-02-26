@@ -1,6 +1,7 @@
 # GMAPS DATA EXTRACTOR
 
 ## Step by step:
+- Clone this repo & go to project `git clone https://github.com/singotech/gmaps-data-extractor.git && cd gmaps-data-extractor`
 - Create venv for python then activate it `source .venv/bin/activate`
 - Run `pip install -r requirements.txt`
 - download geckodriver from official page here
