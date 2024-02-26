@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from fake_useragent import UserAgent
-import re, argparse, os, concurrent.futures
+import re, random, argparse, os, concurrent.futures
 
 MAX_THREADS = 5  # Adjust this value based on your preference
 
@@ -30,7 +30,7 @@ def crawl(url):
     print('--- Visit URL ' + urlTitle[0] + '  ---')
     driver.get(url)
     driver.delete_all_cookies()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(random.randrange(1, 6))
 
     page_source = driver.page_source
 

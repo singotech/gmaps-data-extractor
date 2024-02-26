@@ -36,7 +36,7 @@ def get_url(keyword):
     # Open Google homepage
     driver.get('https://www.google.com/maps/search/' + keyword.replace(' ', '+'))
     driver.delete_all_cookies()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(random.randrange(1, 6))
 
     print('--- Scrolling page ---')
     counter = 0
