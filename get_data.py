@@ -99,7 +99,7 @@ def get_data(input_file):
                 continue
 
             with open("output/data.csv", "a") as filetowrite:
-                filetowrite.write(url + ',' + businessTitle + ',' + businessCategory + ',' + star + ',' + review + ',' + businessAddress + ',' + phoneNumber + '\n')
+                filetowrite.write(url.replace(',', '%2C') + ',' + businessTitle + ',' + businessCategory + ',' + star + ',' + review + ',' + businessAddress + ',' + phoneNumber + '\n')
 
             print("--- Save record ---")
 
