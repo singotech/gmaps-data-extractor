@@ -106,7 +106,7 @@ def crawl(url):
 
 def get_data(input_file):
     print('--- Execute get_data.py ---')
-    if input_file == None or len(input_file) <= 0 == '':
+    if input_file == '':
         input_file = './output/urls.txt'
     with open(input_file) as filetoread:
         urls = filetoread.read().splitlines()
