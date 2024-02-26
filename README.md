@@ -13,5 +13,9 @@
 - If the keyword show you some businesses the you can run the app `python main.py --kw="you keyword here"`
 
 ## Tested on:
-- Darwin local 21.6.0 Darwin Kernel Version 21.6.0
-- Python 3.11.6
+- Darwin
+    - v 21.6.0 Darwin Kernel Version 21.6.0
+    - Python 3.11.6
+- Linux
+    - 6.5.0-9-generic #9-Ubuntu x86_64 x86_64 x86_64 GNU/Linux
+    - Python 3.11.6
