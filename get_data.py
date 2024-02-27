@@ -51,13 +51,15 @@ def crawl(url, kw):
     # input             : <span aria-label="8.073 ulasan">(8.073)</span>
     # pattern           : aria-label=\"(\S+) ulasan
     # expected output   : aria-label="8.073 ulasan
-    review = '-'
+    review = '0'
     patternReview = r"aria-label=\"(\S+) ulasan"
     matches = re.search(patternReview, page_source)
     if matches != None:
-        review = matches.group()
-        review = review.replace('aria-label="', '')
-        review = review.replace(',', ';')
+        if "tulis" not in matches.group().lower():
+            review = matches.group()
+            review = review.replace('aria-label="', '')
+            review = review.replace('.', '')
+            review = review.replace(' ulasan', '')
     print(review)
 
     # Get Business Category
@@ -119,6 +121,10 @@ def get_data(input_file, kw):
         input_file = './output/_urls.txt'
     with open(input_file) as filetoread:
         urls = filetoread.read().splitlines()
+
+    with open('output/' + kw + '_data.csv', 'a') as filetowrite:
+        # filetowrite.write( + ',' + businessTitle + ',' + businessCategory + ',' + star + ',' + review + ',' + businessAddress + ',' + phoneNumber + '\n')
+        filetowrite.write( 'maps,nama,kategori,bintang,ulasan,alamat,nomor\n')
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
         executor.map(lambda url: crawl(url, kw), urls)
