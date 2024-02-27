@@ -78,7 +78,7 @@ def get_url(keyword):
     for match in matches:
         url = match.group().replace('"', '')
         print(url)
-        with open("output/urls.txt", "a") as filetowrite:
+        with open('output/' + keyword +'_urls.txt', 'a') as filetowrite:
             filetowrite.write(url + "\n")
 
     print('--- Close Browser ---')

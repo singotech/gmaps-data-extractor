@@ -5,7 +5,7 @@ import re, random, argparse, os, concurrent.futures
 
 MAX_THREADS = 5  # Adjust this value based on your preference
 
-def crawl(url):
+def crawl(url, kw):
     if url == '':
         return
     print('--- Opening Browser ---')
@@ -104,7 +104,7 @@ def crawl(url):
         driver.quit()
         return
 
-    with open("output/data.csv", "a") as filetowrite:
+    with open('output/' + kw + '_data.csv', 'a') as filetowrite:
         filetowrite.write(url.replace(',', '%2C') + ',' + businessTitle + ',' + businessCategory + ',' + star + ',' + review + ',' + businessAddress + ',' + phoneNumber + '\n')
     print("--- Save record ---")
 
@@ -113,15 +113,15 @@ def crawl(url):
     # Close the browser window
     driver.quit()
 
-def get_data(input_file):
+def get_data(input_file, kw):
     print('--- Execute get_data.py ---')
     if input_file == '':
-        input_file = './output/urls.txt'
+        input_file = './output/_urls.txt'
     with open(input_file) as filetoread:
         urls = filetoread.read().splitlines()
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
-        executor.map(lambda url: crawl(url), urls)
+        executor.map(lambda url: crawl(url, kw), urls)
 
 if __name__ == '__main__':
     if not os.path.exists('./driver/geckodriver'):
@@ -129,11 +129,11 @@ if __name__ == '__main__':
         exit()
 
     parser = argparse.ArgumentParser("get_data")
-    parser.add_argument("--input_file", help="File that contains list of urls, ex: /full/path/to/urls.txt", type=str)
+    parser.add_argument("--input_file", help="File that contains list of urls, ex: /full/path/to/_urls.txt", type=str)
     args = parser.parse_args()
     input_file = args.input_file
     if input_file == None or len(input_file) <= 0:
-        input_file = "./output/urls.txt"
+        input_file = "./output/_urls.txt"
     else:
         if not os.path.exists(input_file):
             print("file does not exist")

@@ -1,5 +1,6 @@
 from get_url import *
 from get_data import *
+import os
 
 if __name__ == '__main__':
     if not os.path.exists('./driver/geckodriver'):
@@ -14,5 +15,4 @@ if __name__ == '__main__':
         print('Keyword too short, please add more than a word')
     else:
         get_url(kw)
-        get_data('')
-
+        get_data('output/' + kw +'_urls.txt', kw)
