@@ -101,10 +101,6 @@ def crawl(url, kw):
         phoneNumber = matches.group()
         phoneNumber = phoneNumber.replace('phone:tel:', '')
         print(phoneNumber)
-    else :
-        print("--- Phone number not found, skipped ---")
-        driver.quit()
-        return
 
     with open('output/' + kw + '_data.csv', 'a') as filetowrite:
         filetowrite.write(url.replace(',', '%2C') + ',' + businessTitle + ',' + businessCategory + ',' + star + ',' + review + ',' + businessAddress + ',' + phoneNumber + '\n')
